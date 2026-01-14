@@ -76,3 +76,31 @@ SELECT * FROM employees ORDER BY fname DESC
 
 SELECT department, fname, salary FROM employees
 SELECT department, fname, salary FROM employees ORDER BY department, fname, salary
+
+--- LIKE ----
+SELECT * FROM employees WHERE department LIKE '%MAN%'
+SELECT * FROM employees WHERE fname LIKE '[ABCDE]%'
+SELECT * FROM employees WHERE fname LIKE '[^A]%'
+SELECT * FROM employees WHERE fname LIKE '_a%'
+SELECT * FROM employees WHERE fname LIKE '____'
+SELECT * FROM employees WHERE email LIKE '%gupta%'
+
+----- TOP ----
+SELECT TOP 3 * FROM employees ORDER BY salary DESC
+SELECT TOP 5 * FROM employees ORDER BY hire_date DESC
+SELECT TOP 3 * FROM employees where department = 'Tech' ORDER BY fname
+SELECT TOP 2 * FROM employees 
+
+---- EXERCISE PEACTICE----------
+---- 1:  Find Different type of departments in database?
+---- 2: Display records with High-low salary
+---- 3: How to see only top 3 records from a table?
+---- 4: Show records where first name start with letter 'A'
+---- 5: Show records where length of the lname is 4 characters
+SELECT * FROM employees
+
+SELECT DISTINCT department from employees
+SELECT * FROM employees ORDER BY salary DESC
+SELECT TOP 3 * FROM employees 
+SELECT * FROM employees WHERE fname LIKE 'A%'
+SELECT * FROM employees WHERE fname LIKE '____'
