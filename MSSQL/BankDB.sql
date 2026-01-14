@@ -92,7 +92,7 @@ SELECT TOP 3 * FROM employees where department = 'Tech' ORDER BY fname
 SELECT TOP 2 * FROM employees 
 
 ---- EXERCISE PEACTICE----------
----- 1:  Find Different type of departments in database?
+---- 1: Find Different type of departments in database?
 ---- 2: Display records with High-low salary
 ---- 3: How to see only top 3 records from a table?
 ---- 4: Show records where first name start with letter 'A'
@@ -104,3 +104,43 @@ SELECT * FROM employees ORDER BY salary DESC
 SELECT TOP 3 * FROM employees 
 SELECT * FROM employees WHERE fname LIKE 'A%'
 SELECT * FROM employees WHERE fname LIKE '____'
+
+--- Logical Operators --
+SELECT * FROM employees WHERE salary=75000 AND department='Sales' 
+SELECT * FROM employees WHERE salary=75000 OR department='Sales' OR city='Mumbai'
+SELECT * FROM employees WHERE department NOT IN ('Tech', 'Sales', 'Management')
+SELECT * FROM employees WHERE salary BETWEEN 75000 AND 100000
+
+--- IN and BETWEEN
+SELECT * FROM employees WHERE department IN ('Tech', 'Sales', 'Management')
+SELECT * FROM employees WHERE department NOT IN ('Tech', 'Sales', 'Management')
+SELECT * FROM employees WHERE salary BETWEEN 75000 AND 100000
+
+--- CASE ----
+SELECT fname, lname, salary,
+	CASE 
+		WHEN salary > 100000 THEN 'High Earner'
+		WHEN salary > 80000 AND salary <= 100000 THEN 'Medium Earner'
+		ELSE 'Standard Earner'
+	END AS salary_band
+FROM employees
+
+--- CASE EXERCISE 1----
+SELECT fname, lname, department, salary,
+	CASE 
+		WHEN department IN ('Sales', 'Marketing') THEN salary * 0.10
+		WHEN department = 'Tech' THEN salary * 0.12
+		ELSE salary * 0.05
+	END AS bonus_amount
+FROM employees
+
+--- CASE EXERCISE 2----
+SELECT fname, lname, salary,
+	CASE 
+		WHEN salary >= 100000 THEN 'High'
+		WHEN salary >= 75000 AND salary < 100000 THEN 'Mid'
+		ELSE 'Low'
+	END AS salary_band
+FROM employees
+
+
