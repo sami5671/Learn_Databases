@@ -135,12 +135,46 @@ SELECT fname, lname, department, salary,
 FROM employees
 
 --- CASE EXERCISE 2----
-SELECT fname, lname, salary,
+SELECT 
 	CASE 
 		WHEN salary >= 100000 THEN 'High'
 		WHEN salary >= 75000 AND salary < 100000 THEN 'Mid'
 		ELSE 'Low'
-	END AS salary_band
+	END AS bonus,
+		COUNT(emp_id)
 FROM employees
+GROUP BY 
+	CASE 
+		WHEN salary >= 100000 THEN 'High'
+		WHEN salary >= 75000 AND salary < 100000 THEN 'Mid'
+		ELSE 'Low'
+	END
 
 
+--- Aggregate functions ---
+
+--- 1. How to find total no. of employees?
+--- 2. Employee with Max or Min salary
+--- 3. Average salary of employees
+--- 4. Sum/total salary paid
+
+SELECT COUNT(*) FROM employees
+SELECT MAX(salary) FROM employees
+SELECT MIN(salary) FROM employees
+SELECT AVG(salary) FROM employees
+SELECT SUM(salary) FROM employees
+
+SELECT emp_id, fname, salary FROM employees WHERE 
+	   salary = (SELECT MAX(salary) FROM employees)
+
+
+--- Group By ---
+SELECT department, COUNT(emp_id) AS COUNT FROM employees GROUP BY department
+
+SELECT city, COUNT(emp_id) AS COUNT FROM employees GROUP BY city
+
+SELECT department, AVG(salary) AS average_salary, count(emp_id) as count FROM employees GROUP BY department
+SELECT department, SUM(salary) AS average_salary, count(emp_id) as count FROM employees GROUP BY department
+
+--- Multi-Level Grouping ---
+SELECT department, city, COUNT(emp_id) AS COUNT FROM employees GROUP BY department, city ORDER BY department
